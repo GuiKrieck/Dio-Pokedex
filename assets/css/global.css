@@ -1,0 +1,27 @@
+*{
+    font-family: 'Roboto', sans-serif; /* definindo a fonte*/
+    box-sizing: border-box; /*padronizando as bordas*/
+}
+
+body{
+    background-color: #d3d2d2;;
+}
+.content{
+    height: 100vh; /*vh = view height no caso o 100 é o tamanho da tela inteira*/
+    width: 100vw;/*vw = view width no caso a largura da tela inteira*/
+    padding: 1rem; /*dando um pading pro content do site o rem vai funcionar de acordom com o tamanho da fonte do usuário*/
+    background-color: #d3d2d2;;
+}
+
+@media screen and (min-width: 992px) {
+    .content{
+        max-width: 992px;
+        height: auto;
+        margin: 1rem auto;/*quando colocamos que a margin é auto ele coloca o maximo de margem possivel pra esquerda e direita então ele centraliza*/
+        border-radius: 1rem;
+    }
+}
+
+.content h1{
+    margin: 0; /*dando uma margin pro titulo*/
+}

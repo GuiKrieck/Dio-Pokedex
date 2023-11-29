@@ -1,0 +1,15 @@
+CRIANDO UM PROJETO COM HTML E CSS PARA LISTAGEM DE POKEMON
+    Adicionando normalize css no projeto
+        quando vamos criar um site é normal termos dificuldade com o jeito que o navegador vai interpretar nosso codigo, por isso precisamos de um normalize css
+        esse arquivo vai igualar todo o estilo padrão de diferentes navegadores, fazendo com que ele funcione com qualquer outro navegador
+        pesquisando no google por cdn normalize css ele vai te levar pra um site onde vc pode pegar o link
+
+        Organização é muito importante em qualquer projeto.
+
+        existe uma técnica chamada mobile first... a intenção é primeiro fazer o css pra mobile, e depois incrementar o css para as telas maiores
+        é feito dessa maneira para não precisar re-escrever muito o css, pois precisava diminuir muitas coisas, então uma boa prática é primeira fazer o css mais simples
+        que é o mobile e depois modificar pequenas coisas para telas maiores então por isso começamos pela parte mobile no google chrome no dev tools é possivel simular alguns dispositivos
+         
+        rem é uma unidade de medida relativa no css, ela funciona bem por não ser fixa e sim por ser baseada no tamanho da fonte que o usuário usa no browser
+
+        Geralmente quando programamos o css, é costume fazer tudo no proprio browser e depois jogar o codigo para a IDE

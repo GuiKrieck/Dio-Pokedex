@@ -1,0 +1,113 @@
+Uma Api é um servidor que serve dados, sua função é somente servir informação (sem estilos) é como se fosse
+um arquivo json, é importantissimo entender como o protocolo http funciona pra quem quer trabalhar com programação
+
+o protocolo http é um protocolo cliente x servidor, onde o cliente faz um pedido o servidor processa e devolve uma
+resposta para esse pedido
+
+Para montar uma requisição http, primeiro temos o path ou seja a url, o path vai dizer o ip e a porta do servidor
+e o endereço do recurso que agente quer.
+então a URL é composta por ip(endereço)/path = caminho de identificação do recurso então na url 
+https://pokeapi.co/api/v2/pokemon
+o IP é https://pokeapi.co = o servidor de dns sabe como converter essa informação para um ip e acessar determinado local
+e o que vem apó o IP é o path /api/v2/pokemon. isso quer dizer o caminho que eu quero acessar naquele servidor
+então uma outra maneira de ler isso, é que eu dentro do servidor https://pokeapi.co eu quero a informação contida
+no /api/v2/pokemon
+
+existem também o tipo de solicitação, quando digitamos uma url no browser e clicamos em enter, fazemos uma solicitação para aquele servidor
+esse tipo de solicitação é o GET, ou seja, queremos pegar informações. Isso é conhecido como request method
+tipos de request method GET/Post/Put/Delete/Path
+
+cada um desses tipos significa uma coisa no servidor, ou seja, quando fazemos um get em determinado servidor, o servidor entende que queremos 
+buscar informações
+quando fazemos um post/pokemon, quer dizer que queremos inserir um novo pokemon
+ja um put, pode ser usado para atualizar as informações contidas
+o delete, pode ser usado para apagar uma informação
+
+O importante é que toda solicitação para determinado recurso, o metodo vai dizer o que queremos fazer sobre esse recurso
+principalmente nas APIs que seguem o padrão REST.
+
+para fazermos uma requisição ou cumprirmos determinada tarefa, precisamos enviar dados para o servidor,e para passarmos esses dados existem algumas formas
+uma contida no proprio path, 
+
+Carry string, é uma descrição de busca, toda vez que fazemos um get, quer dizer que queremos buscar algo, e as vezes pra fazer esse get
+precisamos passar algum dado para filtrar esse busca
+a sintaxe de uma carry string, a carry string começa após o um ponto de interrogação, ela sempre vai ser composta por chave e valor ex. type=grass e caso queiramos adicionar outro argumento
+usamos o & type=grass&name=i
+https://pokeapi.co/api/v2/pokemon?type=grass&name=i
+então tudo que vem após ao ponto de interrogação é a sintaxe da carry string. le-se que quermos procurar no servidor e no path pela chave type que seja igual ao valor grass e a chave nome contenha o valor i
+
+offset na carry string pode ser considerado como uma paginação, ou seja, suponha que vc tem um grande numero de itens pra listar em sua api, colocando um offset vc pode paginar esse conteudo
+limit = ja o limit significa o numero de items que será carregado por página
+ou seja
+offset=20&limit=20: quer dizer que dessa lista de itens será carregado os 20 primeiros itens, caso queiramos ir para a "página 2" devemos colocar o offset em 40
+geralmente o offset é adicionado pelo limit, para limitarmos a passagem das páginas
+
+headers: são areas de dados onde podemos transmitir e receber coisas do servidor
+esses headers normalmente são metadados da nossa requisição são coisas para descrever a requisição ou complementar a requisição
+
+dentro dos headers temos:
+request header, que o navegador passa para o servidor dizendo o que ele está pedidon e o que ele aceita como resultado
+
+e o response header, que o servidor diz pro navegador o que ele está devolvendo de determinada requisição
+
+normalmente as autentificações como login e senhas são passados por headers.
+
+body
+	dependendo do metodo que estivermos usando na requisição o body será composto pelos dados que queremos trafegar
+	get não tem body na definição
+	ja para o post o body faz sentido
+	
+	body pode estar presente tanto na requisição quanto na resposta
+	o get na resposta tem body
+	
+então na requisição temos
+
+Requisição HTTP
+Request method
+Request headers
+Request body
+
+e na response temos
+STATUS CODE: o status code é responsável pelo resultado da requisição, se ela foi processada, se teve sucesso ou não, ele volta um numero e esse numero indica o que aconteceu com a requisição
+Status code 200-299 - sucesso
+			300-399 - redirecionamento
+			400-499 - erro do lado do cliente
+			500-599 - erro do lado do servidor
+
+Response Headers
+Response body
+
+fetch api é um biblioteca integrada ao javascript do browsers, O Fetch fornece um definição genérica de objetos de Request e Response (e outras coisas envolvidas com solicitação de rede)
+isso permitira que eles sejam usados onde quer que sejam necessários no futuro, seja para service workers, Cache API e outras coisas similares que manipulam ou modifiquem pedidos e respostas 
+ou qualquer tipo de caso de sua que possa exigir que você gere suas próprias responses programaticamente
+
+o fetch retorna uma promisse, e para podermos tratar esse retorno podemos usar 3 metodos
+
+then(callbackFunction(response){}) o then será executado quando a promessa tiver sucesso, ou seja, conseguimos conectar com a api e pegar os dados necessários, ai passamos uma function pra executar a lógica que queremos.
+catch(callbackFunction(error){}) o catch será executado quando a promessa retornar um erro, nesse caso é comum darmos um console.log com o erro em questão para poder tratar
+finally(callbackFunction(){}), o finally será executado independete da promessa ter retornado um erro ou um sucesso.
+
+exemplo da estrutura completa
+
+fetch(url)
+    .then(function (response){
+
+    })
+    .catch(function(error){
+        console.error(error)
+    })
+    .finally(function() {
+        console.log('requisição concluída!')
+    })
+	
+podemos ter mais de um then para tratar a mesma promisse, nesse caso o segundo then recebe o retorno do primeiro
+além disso não precisamos declara a function de maneira "clássica" podemos usar as arrow function, trocamos a palavra function antes dos parametros para uma flecha => após os parametros
+como detalhe uma arrow function que retorna algo e tem somente uma linha não precisa ter corpo, então a mesma estrutura acima ficaria assim 
+
+fetch(url)
+    .then((response) => response.json())
+    .then((jsonBody) => console.log(jsonBody))
+    .catch((error) => console.error(error))
+	
+colocando a palavra debugger no codigo javascript faz com que na hora da execuçã um break point seja criado naquele lugar
+muito usado para debugar codigo
